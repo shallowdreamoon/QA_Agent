@@ -30,3 +30,11 @@ def retrieve_topk(query: str, topk: int = 3) -> List[Dict]:
     except Exception:
         ranked = sorted(docs, key=lambda d: _simple_score(query, d.get("text", "")), reverse=True)
         return ranked[:topk]
+
+
+def search(extracted: Dict[str, str], topk: int = 3) -> List[Dict]:
+    country = extracted.get("country", "")
+    ip_type = extracted.get("ip_type", "")
+    action = extracted.get("action", "")
+    query = f"{country} {ip_type} {action}".strip()
+    return retrieve_topk(query=query, topk=topk)

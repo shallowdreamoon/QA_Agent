@@ -1,19 +1,23 @@
 from typing import Dict, List
 
 
-def apply_rules(country: str, ip_type: str, action: str) -> Dict[str, List[str]]:
+def apply_rules(extracted: Dict[str, str]) -> Dict[str, List[str]]:
+    country = extracted.get("country", "")
+    ip_type = extracted.get("ip_type", "")
+    action = extracted.get("action", "")
+
     basis = []
     risk_level = "中"
 
-    if country == "US" and ip_type == "专利" and action == "销售":
+    if country in {"US", "美国"} and ip_type == "专利" and action == "销售":
         risk_level = "中高"
         basis.append("规则: 美国 + 专利 + 销售 => 中高风险")
 
-    if country == "EU" and ip_type == "商标":
+    if country in {"EU", "欧盟"} and ip_type == "商标":
         risk_level = "中"
         basis.append("规则: 欧盟 + 商标 => 注册与近似冲突风险")
 
-    if country == "JP" and ip_type == "版权" and action == "研发":
+    if country in {"JP", "日本"} and ip_type == "版权" and action == "研发":
         risk_level = "中"
         basis.append("规则: 日本 + 版权 + 研发 => 代码/内容许可合规风险")
 
