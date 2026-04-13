@@ -101,6 +101,7 @@ export LLM_MODEL_NAME=gpt-4o-mini
 
 当环境变量缺失或请求失败时，系统自动降级到规则/模板路径。
 
+
 ## 6. 示例测试脚本
 
 ```bash
