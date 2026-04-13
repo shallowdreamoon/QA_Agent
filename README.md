@@ -85,22 +85,12 @@ uvicorn main:app --reload --port 8000
 
 ## 5. LLM配置
 
-通过环境变量配置可切换供应商的大模型 API：
+默认通过 `OPENAI_API_KEY` 调用 OpenAI。可选环境变量：
 
-- `LLM_API_KEY`
-- `LLM_BASE_URL`
-- `LLM_MODEL_NAME`
+- `OPENAI_API_KEY`
+- `OPENAI_MODEL`（默认 `gpt-4o-mini`）
 
-示例：
-
-```bash
-export LLM_API_KEY=your_key
-export LLM_BASE_URL=https://api.openai.com
-export LLM_MODEL_NAME=gpt-4o-mini
-```
-
-当环境变量缺失或请求失败时，系统自动降级到规则/模板路径。
-
+若未配置 API Key，系统会启用确定性 fallback 逻辑（规则+模板），保证可演示。
 
 ## 6. 示例测试脚本
 
